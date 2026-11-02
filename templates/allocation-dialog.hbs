@@ -1,0 +1,39 @@
+{{!-- Contents of the allocation window (see scripts/allocation-app.js). --}}
+<div class="thr-allocation-body">
+  <div class="thr-alloc-head">
+    <img src="{{talent.img}}" alt="{{talent.name}}" width="32" height="32">
+    <strong>{{talent.name}}</strong>
+    <img src="{{rankImg}}" alt="{{rank}}" width="32" height="32">
+  </div>
+
+  {{!-- Live countdown of the points still unspent. --}}
+  <p>{{localize "THR.Pool.Label"}}: <strong>{{poolLeft}}</strong></p>
+
+  <div class="thr-progress">
+    <div class="thr-bar" style="width: {{percent}}%"></div>
+    <span class="thr-progress-text">{{allocated}} + {{pending}} / {{cost}}</span>
+  </div>
+
+  {{!-- Choose how many points to add. "-" only lowers the unconfirmed amount. --}}
+  <div class="thr-stepper">
+    <button type="button" data-action="decrease" {{#unless canDecrease}}disabled{{/unless}}>
+      <i class="fa-solid fa-minus"></i>
+    </button>
+    <span class="thr-pending">{{pending}}</span>
+    <button type="button" data-action="increase" {{#unless canIncrease}}disabled{{/unless}}>
+      <i class="fa-solid fa-plus"></i>
+    </button>
+    <button type="button" data-action="max" {{#unless canIncrease}}disabled{{/unless}}>
+      {{localize "THR.Allocate.Max"}}
+    </button>
+  </div>
+
+  <p class="hint">{{localize "THR.Allocate.Warning"}}</p>
+
+  <footer class="thr-alloc-footer">
+    <button type="button" data-action="cancel">{{localize "THR.Allocate.Cancel"}}</button>
+    <button type="button" data-action="confirm" {{#unless canConfirm}}disabled{{/unless}}>
+      <i class="fa-solid fa-check"></i> {{localize "THR.Allocate.Confirm"}}
+    </button>
+  </footer>
+</div>

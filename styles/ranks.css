@@ -1,0 +1,56 @@
+/* ranks.css: styling for the Talents tab and the allocation window.
+   Class names all start with "thr-" so they can't clash with dnd5e's styles. */
+
+.thr-talents .thr-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+.thr-talents .thr-header input { width: 5rem; }
+
+.thr-list { list-style: none; margin: 0; padding: 0; }
+
+/* Each talent row is a single horizontal line of controls. */
+.thr-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-bottom: 1px solid var(--color-border-light-tertiary, #ccc);
+}
+.thr-name { flex: 0 0 6rem; font-weight: bold; }
+.thr-icon, .thr-rank-img { flex: 0 0 32px; }
+.thr-rank { width: 4.5rem; }
+
+/* Progress bar: a grey track with a coloured fill. Width is set in the template. */
+.thr-progress {
+  position: relative;
+  flex: 1;
+  min-width: 6rem;
+  height: 1.25rem;
+  background: rgb(0 0 0 / 15%);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.thr-bar { height: 100%; background: #4a7fb5; }
+.thr-progress-text {
+  position: absolute;
+  inset: 0;
+  text-align: center;
+  line-height: 1.25rem;
+  font-size: var(--font-size-12, 12px);
+}
+
+.thr-btn { width: auto; min-width: 2rem; }
+.thr-promote { background: #3b8a4a; color: #fff; }
+
+/* Colour hint for the trait dropdown. */
+.thr-trait-strength { color: #2e7d32; }
+.thr-trait-weakness { color: #c62828; }
+
+.thr-allocation-body { display: flex; flex-direction: column; gap: 0.5rem; padding: 0.5rem; }
+.thr-alloc-head { display: flex; align-items: center; gap: 0.5rem; }
+.thr-stepper { display: flex; align-items: center; justify-content: center; gap: 0.75rem; }
+.thr-pending { font-size: 1.5rem; min-width: 2rem; text-align: center; }
+.thr-alloc-footer { display: flex; justify-content: flex-end; gap: 0.5rem; }

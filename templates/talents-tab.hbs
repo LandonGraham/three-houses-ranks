@@ -1,0 +1,66 @@
+<section class="tab thr-talents" data-tab="three-houses-talents" data-group="primary">
+  {{!-- Header: the pool of XP points the player has not spent yet. --}}
+  <header class="thr-header">
+    <label for="thr-pool">{{localize "THR.Pool.Label"}}</label>
+    {{!-- The pool can only be typed into while the sheet is in edit mode. --}}
+    <input id="thr-pool" type="number" min="0" step="1" value="{{thr.pool}}"
+           data-thr-field="pool" {{#unless thr.editMode}}disabled{{/unless}}>
+  </header>
+
+  {{!-- One row per talent. --}}
+  <ul class="thr-list">
+    {{#each thr.rows as |row|}}
+    <li class="thr-row" data-talent-id="{{row.id}}">
+      <img class="thr-icon" src="{{row.img}}" alt="{{row.name}}" width="32" height="32">
+      <span class="thr-name">{{row.name}}</span>
+
+      <img class="thr-rank-img" src="{{row.rankImg}}" alt="{{row.rank}}" width="32" height="32">
+
+      {{!-- Rank can only be changed directly in edit mode. --}}
+      <select class="thr-rank" data-thr-field="rank" {{#unless ../thr.editMode}}disabled{{/unless}}>
+        {{#each row.rankOptions as |opt|}}
+        <option value="{{opt.id}}" {{#if opt.selected}}selected{{/if}}>{{opt.label}}</option>
+        {{/each}}
+      </select>
+
+      {{!-- Progress toward the next rank: allocated / cost. --}}
+      <div class="thr-progress" title="{{row.allocated}} / {{row.cost}}">
+        <div class="thr-bar" style="width: {{row.percent}}%"></div>
+        <span class="thr-progress-text">
+          {{#if row.atMax}}{{localize "THR.Rank.Max"}}{{else}}{{row.allocated}} / {{row.cost}}{{/if}}
+        </span>
+      </div>
+
+      {{!-- "+" opens the allocation window. Available outside edit mode. --}}
+      <button type="button" class="thr-btn" data-thr-action="allocate"
+              data-tooltip="THR.Allocate.Button" {{#unless row.canAllocate}}disabled{{/unless}}>
+        <i class="fa-solid fa-plus"></i>
+      </button>
+
+      {{!-- Promote only appears when the bar is full. --}}
+      {{#if row.canPromote}}
+      <button type="button" class="thr-btn thr-promote" data-thr-action="promote">
+        <i class="fa-solid fa-arrow-up"></i> {{localize "THR.Promote"}}
+      </button>
+      {{/if}}
+
+      {{!-- Strength / Weakness. Changed only in edit mode. --}}
+      <select class="thr-trait thr-trait-{{row.trait}}" data-thr-field="trait"
+              {{#unless ../thr.editMode}}disabled{{/unless}}>
+        {{#each row.traitOptions as |opt|}}
+        <option value="{{opt.id}}" {{#if opt.selected}}selected{{/if}}>{{localize opt.label}}</option>
+        {{/each}}
+      </select>
+
+      {{!-- Budding Talent flag and its lifetime progress (invested / threshold). --}}
+      <label class="thr-budding" title="{{localize 'THR.Budding.Hint'}}">
+        <input type="checkbox" data-thr-field="budding"
+               {{#if row.budding}}checked{{/if}}
+               {{#if row.buddingDisabled}}disabled{{else}}{{#unless ../thr.editMode}}disabled{{/unless}}{{/if}}>
+        {{localize "THR.Budding.Label"}}
+        {{#if row.budding}}<span class="thr-budding-count">{{row.invested}} / {{../thr.threshold}}</span>{{/if}}
+      </label>
+    </li>
+    {{/each}}
+  </ul>
+</section>

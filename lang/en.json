@@ -1,0 +1,33 @@
+{
+  "THR": {
+    "Tab": { "Title": "Talents" },
+    "Pool": { "Label": "Unallocated XP" },
+    "Rank": { "Max": "MAX" },
+    "Promote": "Promote",
+    "Trait": {
+      "None": "Neutral",
+      "Strength": "Strength",
+      "Weakness": "Weakness"
+    },
+    "Budding": {
+      "Label": "Budding",
+      "Hint": "After enough points are invested in this talent, it becomes a Strength."
+    },
+    "StrengthCannotBud": "A Strength cannot also be a Budding Talent.",
+    "BuddingCompleted": "{actor}'s Budding Talent in {talent} has become a Strength!",
+    "Allocate": {
+      "Title": "Allocate Points: {talent}",
+      "Button": "Allocate points",
+      "Max": "Max",
+      "Confirm": "Confirm",
+      "Cancel": "Cancel",
+      "Warning": "Confirmed points are locked in and cannot be refunded."
+    },
+    "Settings": {
+      "BuddingThreshold": {
+        "Name": "Budding Talent threshold",
+        "Hint": "Lifetime points that must be invested in a Budding Talent before it becomes a Strength."
+      }
+    }
+  }
+}
