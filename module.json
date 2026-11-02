@@ -1,0 +1,30 @@
+{
+  "id": "three-houses-ranks",
+  "title": "Three Houses Ranks for D&D 5th Edition",
+  "description": "Adds a Talents tab (ranked E to S) to D&D 5e character and NPC sheets, with XP allocation, Strengths, Weaknesses and Budding Talents.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "5.0.0"
+        }
+      }
+    ]
+  },
+  "esmodules": ["scripts/main.js"],
+  "styles": ["styles/ranks.css"],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ]
+}
