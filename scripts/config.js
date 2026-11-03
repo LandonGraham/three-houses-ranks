@@ -10,7 +10,7 @@
 export const MODULE_ID = "three-houses-ranks";
 
 // File extension of your images. Change this one line if you use
-// .png instead of .webp.
+// a different format (for example "webp").
 export const IMAGE_EXT = "png";
 
 // The only actor types that get a Talents tab (vehicles and groups do not).

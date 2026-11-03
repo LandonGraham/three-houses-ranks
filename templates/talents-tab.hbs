@@ -1,4 +1,7 @@
-<section class="tab thr-talents" data-tab="three-houses-talents" data-group="primary">
+{{!-- tab.cssClass / tab.id / tab.group are supplied by the sheet. cssClass contains
+      "active" for the selected tab, so it must be here or the tab disappears
+      every time the sheet redraws (edit mode toggle, saving a change). --}}
+<section class="tab thr-talents {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
   {{!-- Header: the pool of XP points the player has not spent yet. --}}
   <header class="thr-header">
     <label for="thr-pool">{{localize "THR.Pool.Label"}}</label>
