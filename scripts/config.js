@@ -63,6 +63,20 @@ export const TALENTS = TALENT_DEFS.map(([id, name]) => ({
   img: `modules/${MODULE_ID}/assets/talents/${id}.${IMAGE_EXT}`
 }));
 
+// Icons for Strength and Weakness (a talent with neither shows no icon).
+export const TRAIT_ICONS = {
+  strength: `modules/${MODULE_ID}/assets/traits/strength.${IMAGE_EXT}`,
+  weakness: `modules/${MODULE_ID}/assets/traits/weakness.${IMAGE_EXT}`
+};
+
+// Budding Talent icons: index 0 = 0/3 complete ... index 3 = 3/3 complete.
+export const BUDDING_ICONS = [0, 1, 2, 3].map(
+  (stage) => `modules/${MODULE_ID}/assets/budding/budding-${stage}.${IMAGE_EXT}`
+);
+
+// The Budding icon has this many steps (0/3, 1/3, 2/3, 3/3).
+export const BUDDING_STAGES = 3;
+
 // Default for the world setting "Budding Talent threshold": the lifetime
 // points that must be invested in a Budding talent to turn it into a Strength.
 export const DEFAULT_BUDDING_THRESHOLD = 12;

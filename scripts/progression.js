@@ -19,7 +19,7 @@
 //   }
 // ---------------------------------------------------------------------------
 
-import { RANKS, MAX_RANK_INDEX, TRAITS } from "./config.js";
+import { RANKS, MAX_RANK_INDEX, TRAITS, BUDDING_STAGES } from "./config.js";
 
 // Points needed to advance FROM each rank, by rank index.
 // Index 0 (E -> E+) costs 1, index 9 (A+ -> S) costs 18. S has no entry.
@@ -154,6 +154,14 @@ export function setTrait(talent, trait) {
 export function setBudding(talent, on) {
   if (on && talent.trait === TRAITS.STRENGTH) return null;
   return { ...talent, budding: Boolean(on) };
+}
+
+// Which of the 4 Budding icons to show (0 to 3). The icon advances one step
+// each time another third of the threshold has been invested; with the
+// default threshold of 12 that is every 4 points (4 -> 1/3, 8 -> 2/3, 12 -> 3/3).
+export function buddingStage(invested, threshold) {
+  const perStage = threshold / BUDDING_STAGES;
+  return Math.max(0, Math.min(BUDDING_STAGES, Math.floor(invested / perStage)));
 }
 
 // Check whether a Budding Talent has reached the threshold. If so it becomes

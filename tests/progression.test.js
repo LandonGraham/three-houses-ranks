@@ -14,6 +14,7 @@ import {
   setTrait,
   setBudding,
   applyBudding,
+  buddingStage,
   rankIndex
 } from "../scripts/progression.js";
 
@@ -92,4 +93,11 @@ test("a Strength cannot be Budding", () => {
 test("a trait change never alters the stored cost", () => {
   const t = { ...createTalent(), rank: "C+", cost: 10 };
   assert.equal(setTrait(t, "strength").cost, 10);
+});
+
+test("Budding icon advances every 4 points (threshold 12)", () => {
+  assert.deepEqual(
+    [0, 3, 4, 7, 8, 11, 12, 20].map((n) => buddingStage(n, 12)),
+    [0, 0, 1, 1, 2, 2, 3, 3]
+  );
 });

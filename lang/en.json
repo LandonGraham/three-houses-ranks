@@ -1,13 +1,19 @@
 {
   "THR": {
-    "Tab": { "Title": "Talents" },
-    "Pool": { "Label": "Unallocated XP" },
-    "Rank": { "Max": "MAX" },
+    "Tab": {
+      "Title": "Talents"
+    },
+    "Pool": {
+      "Label": "Unallocated XP"
+    },
+    "Rank": {
+      "Max": "MAX"
+    },
     "Promote": "Promote",
     "Trait": {
-      "None": "Neutral",
-      "Strength": "Strength",
-      "Weakness": "Weakness"
+      "none": "Neutral",
+      "strength": "Strength",
+      "weakness": "Weakness"
     },
     "Budding": {
       "Label": "Budding",
@@ -28,6 +34,13 @@
         "Name": "Budding Talent threshold",
         "Hint": "Lifetime points that must be invested in a Budding Talent before it becomes a Strength."
       }
+    },
+    "Column": {
+      "Talent": "Talent",
+      "Trait": "Strength/Weakness",
+      "Budding": "Budding",
+      "XP": "XP",
+      "Rank": "Rank"
     }
   }
 }
