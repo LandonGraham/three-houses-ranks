@@ -12,7 +12,10 @@ Character and NPC sheets (vehicles and groups are excluded).
   (minimum 1 point, maximum 20).
 - **Budding Talent**: once 12 lifetime points (GM setting) are invested, it becomes a
   Strength. A trait change only affects *future* ranks, never the current bar.
-- Ranks, traits, the pool and Budding can be edited directly in the sheet's edit mode.
+- Each talent row shows: talent icon, name, Strength/Weakness icon, Budding icon, XP (`0/6`),
+  `+`, rank icon and rank dropdown.
+- In edit mode, click the Strength/Weakness icon slot to cycle Neutral/Strength/Weakness and
+  the Budding slot to toggle Budding. The rank dropdown and XP pool are also edit-mode only.
 
 ## Rank costs
 | E | E+ | D | D+ | C | C+ | B | B+ | A | A+ |
@@ -23,6 +26,10 @@ Character and NPC sheets (vehicles and groups are excluded).
 Place your 32x32 images in:
 - `assets/talents/<id>.webp` (swords, lances, axes, bows, brawling, reason, faith, authority, armor, riding, flying)
 - `assets/ranks/<file>.webp` (`e`, `e-plus`, `d`, `d-plus`, `c`, `c-plus`, `b`, `b-plus`, `a`, `a-plus`, `s`)
+
+- `assets/traits/strength.webp` and `assets/traits/weakness.webp`
+- `assets/budding/budding-0.webp` to `budding-3.webp` (0/3, 1/3, 2/3, 3/3 complete).
+  The icon advances every third of the Budding threshold (every 4 points by default).
 
 If you use PNG, change `IMAGE_EXT` in `scripts/config.js`.
 

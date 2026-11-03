@@ -17,9 +17,11 @@ import {
   TALENTS,
   RANKS,
   TRAITS,
+  TRAIT_ICONS,
+  BUDDING_ICONS,
   SUPPORTED_ACTOR_TYPES
 } from "./config.js";
-import { rankIndex, isMaxRank, canPromote } from "./progression.js";
+import { rankIndex, isMaxRank, canPromote, buddingStage } from "./progression.js";
 import {
   getTalent,
   getPool,
@@ -114,19 +116,20 @@ function buildContext(sheet) {
       canAllocate: owner && !atMax && pool > 0 && t.allocated < t.cost,
       canPromote: owner && canPromote(t),
       trait: t.trait,
+      // Icon for the Strength/Weakness column (empty when neutral).
+      traitImg: TRAIT_ICONS[t.trait] ?? null,
+      // Tooltip text such as "Strength", already translated.
+      traitLabel: game.i18n.localize(`THR.Trait.${t.trait}`),
+      // Icon for the Budding column: one of 4 steps, or empty when not Budding.
+      buddingImg: t.budding ? BUDDING_ICONS[buddingStage(t.invested, threshold)] : null,
       isStrength: t.trait === TRAITS.STRENGTH,
       isWeakness: t.trait === TRAITS.WEAKNESS,
       budding: t.budding,
-      // A Strength cannot be a Budding Talent, so the checkbox is disabled.
+      // A Strength cannot be a Budding Talent, so the Budding slot is disabled.
       buddingDisabled: t.trait === TRAITS.STRENGTH,
-      buddingPercent: Math.min(100, Math.round((t.invested / threshold) * 100)),
-      // Dropdown options, with the current value pre-selected.
-      rankOptions: RANKS.map((r) => ({ id: r.id, label: r.label, selected: r.id === t.rank })),
-      traitOptions: [
-        { id: TRAITS.NONE, label: "THR.Trait.None", selected: t.trait === TRAITS.NONE },
-        { id: TRAITS.STRENGTH, label: "THR.Trait.Strength", selected: t.trait === TRAITS.STRENGTH },
-        { id: TRAITS.WEAKNESS, label: "THR.Trait.Weakness", selected: t.trait === TRAITS.WEAKNESS }
-      ]
+      buddingTooltip: `${t.invested} / ${threshold}`,
+      // Rank dropdown options, with the current value pre-selected.
+      rankOptions: RANKS.map((r) => ({ id: r.id, label: r.label, selected: r.id === t.rank }))
     };
   });
 
@@ -161,6 +164,16 @@ function onRenderSheet(sheet, html) {
       new AllocationApp(sheet.actor, talentId).render({ force: true });
     } else if (button.dataset.thrAction === "promote") {
       promoteTalent(sheet.actor, talentId);
+    } else if (button.dataset.thrAction === "cycle-trait") {
+      // Edit mode: click the icon to cycle Neutral -> Strength -> Weakness.
+      const order = [TRAITS.NONE, TRAITS.STRENGTH, TRAITS.WEAKNESS];
+      const current = getTalent(sheet.actor, talentId).trait;
+      const next = order[(order.indexOf(current) + 1) % order.length];
+      editTalentField(sheet.actor, talentId, "trait", next);
+    } else if (button.dataset.thrAction === "toggle-budding") {
+      // Edit mode: click the icon slot to turn the Budding flag on or off.
+      const current = getTalent(sheet.actor, talentId).budding;
+      editTalentField(sheet.actor, talentId, "budding", !current);
     }
   });
 
