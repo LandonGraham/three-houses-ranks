@@ -3,6 +3,9 @@
   "title": "Three Houses Ranks for D&D 5th Edition",
   "description": "Adds a Talents tab (ranked E to S) to D&D 5e character and NPC sheets, with XP allocation, Strengths, Weaknesses and Budding Talents.",
   "version": "0.1.0",
+  "url": "https://github.com/LandonGraham/three-houses-ranks",
+  "manifest": "https://raw.githubusercontent.com/LandonGraham/three-houses-ranks/main/module.json",
+  "download": "https://github.com/LandonGraham/three-houses-ranks/releases/latest/download/three-houses-ranks.zip",
   "compatibility": {
     "minimum": "14",
     "verified": "14"
