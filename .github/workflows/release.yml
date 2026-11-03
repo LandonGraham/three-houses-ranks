@@ -1,0 +1,29 @@
+name: Package Foundry module release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out tagged source
+        uses: actions/checkout@v4
+
+      # Archive only tracked files, excluding Git history and development-only
+      # files. Files are at the ZIP root so Foundry installs them into the
+      # module's own folder without an extra nested directory.
+      - name: Build module ZIP
+        run: |
+          git archive --format=zip --output=three-houses-ranks.zip HEAD
+
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: three-houses-ranks.zip

@@ -48,3 +48,13 @@ Hooks: `threeHousesRanks.rankChanged (actor, talentId, oldRank, newRank)` and
 - Install by copying this folder to `Data/modules/three-houses-ranks` in Foundry.
 - The sheet integration (`scripts/sheet-tab.js`) has not yet been tested inside Foundry;
   see the `VERIFY` comments there if the tab does not appear.
+
+## Foundry updates
+The module manifest is served from:
+`https://raw.githubusercontent.com/LandonGraham/three-houses-ranks/main/module.json`
+
+After this branch is merged into `main`, tag a release as `v0.1.0` (matching
+the version in `module.json`) to have GitHub Actions create a GitHub Release
+with `three-houses-ranks.zip`. Later releases should use a new version in both
+the manifest and tag. Foundry's automatic updater requires the repository and
+release asset to be publicly readable.
