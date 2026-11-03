@@ -40,7 +40,7 @@
       {{!-- Budding icon (4 steps). In edit mode, clicking it toggles Budding.
             A Strength can't be Budding, so that case is disabled. --}}
       <button type="button" class="thr-slot" data-thr-action="toggle-budding"
-              data-tooltip="{{row.buddingTooltip}}"
+              {{#if row.budding}}data-tooltip="{{row.buddingTooltip}}"{{/if}}
               {{#if row.buddingDisabled}}disabled{{else}}{{#unless ../thr.editMode}}disabled{{/unless}}{{/if}}>
         {{#if row.buddingImg}}<img class="thr-budding-img" src="{{row.buddingImg}}" alt="{{localize 'THR.Budding.Label'}}">{{/if}}
       </button>
