@@ -11,25 +11,76 @@
 
 .thr-list { list-style: none; margin: 0; padding: 0; }
 
-/* Every row (and the title row) is a grid with the same 8 columns:
-   talent icon | name | trait icon | budding icon | XP | + | rank icon | rank */
+/* Every row (and the title row) is a grid of 8 EQUAL-width columns:
+   talent icon | name | trait icon | budding icon | XP | + | rank icon | rank
+   "minmax(0, 1fr)" lets each column shrink to its share of the sheet width
+   instead of being stretched by its contents. */
 .thr-columns {
   display: grid;
-  grid-template-columns: 32px minmax(5rem, 1fr) 40px 40px 5.5rem 2rem 32px 4.5rem;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
   align-items: center;
-  gap: 0.5rem;
+  column-gap: 0.5rem;
   padding: 0.25rem 0.5rem;
 }
-.thr-head-row { font-weight: bold; font-size: var(--font-size-12, 12px); }
+
+/* Centre every header and cell, except the name column, which is left-aligned. */
+.thr-head-row > *,
+.thr-row > * {
+  justify-self: center;
+  text-align: center;
+}
+.thr-head-row > :nth-child(2),
+.thr-row > .thr-name {
+  justify-self: start;
+  text-align: left;
+}
+
+.thr-head-row { font-weight: bold; font-size: var(--font-size-12, 12px); line-height: 1.1; }
 .thr-row { border-bottom: 1px solid var(--color-border-light-tertiary, #ccc); }
-.thr-name { font-weight: bold; }
-.thr-xp { display: flex; align-items: center; gap: 0.25rem; }
+
+/* The longest talent name (about 25 characters) wraps onto extra lines
+   inside its column rather than overlapping its neighbours. */
+.thr-name {
+  font-weight: bold;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.1;
+}
+
+.thr-xp { display: flex; align-items: center; justify-content: center; gap: 0.25rem; }
+
+/* ---- Image sizes -----------------------------------------------------------
+   Each image type keeps its true ratio. Only the height is fixed; "aspect-ratio"
+   and "width: auto" make the width follow, so nothing is stretched.
+   max-width keeps an image inside its column on narrow sheets.
+     Talent icon      45 x 45
+     Strength/Weakness 94 x 94
+     Budding Talent   174 x 158
+     Rank             112 x 120                                              */
+.thr-icon,
+.thr-trait-img,
+.thr-budding-img,
+.thr-rank-img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  border: none;
+}
+.thr-icon        { height: 36px; aspect-ratio: 45 / 45; }
+.thr-trait-img   { height: 40px; aspect-ratio: 94 / 94; }
+.thr-budding-img { height: 36px; aspect-ratio: 174 / 158; }
+.thr-rank-img    { height: 40px; aspect-ratio: 112 / 120; }
 
 /* Clickable icon slots (trait / budding). Empty slots stay invisible unless
    the sheet is in edit mode, where a faint outline shows where to click. */
 .thr-slot {
-  width: 40px;
-  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 56px;
+  height: 44px;
   padding: 0;
   background: none;
   border: 1px solid transparent;
@@ -38,6 +89,7 @@
 .thr-slot:not(:disabled) { border: 1px dashed rgb(0 0 0 / 35%); cursor: pointer; }
 .thr-slot:disabled { cursor: default; opacity: 1; }
 
+.thr-rank { width: 100%; }
 .thr-btn { width: auto; min-width: 2rem; }
 .thr-promote { background: #3b8a4a; color: #fff; }
 

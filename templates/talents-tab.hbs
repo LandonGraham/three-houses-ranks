@@ -1,4 +1,7 @@
-<section class="tab thr-talents" data-tab="three-houses-talents" data-group="primary">
+{{!-- tab.cssClass / tab.id / tab.group are supplied by the sheet. cssClass contains
+      "active" for the selected tab, so it must be here or the tab disappears
+      every time the sheet redraws (edit mode toggle, saving a change). --}}
+<section class="tab thr-talents {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
   {{!-- Header: the pool of XP points the player has not spent yet. --}}
   <header class="thr-header">
     <label for="thr-pool">{{localize "THR.Pool.Label"}}</label>
@@ -7,7 +10,7 @@
            data-thr-field="pool" {{#unless thr.editMode}}disabled{{/unless}}>
   </header>
 
-  {{!-- Column titles. Each row below uses the same 8-column grid. --}}
+  {{!-- Column titles. Each row below uses the same 8 equal-width columns. --}}
   <div class="thr-columns thr-head-row">
     <span></span>
     <span>{{localize "THR.Column.Talent"}}</span>
@@ -24,22 +27,22 @@
   <ul class="thr-list">
     {{#each thr.rows as |row|}}
     <li class="thr-columns thr-row" data-talent-id="{{row.id}}">
-      <img class="thr-icon" src="{{row.img}}" alt="{{row.name}}" width="32" height="32">
+      <img class="thr-icon" src="{{row.img}}" alt="{{row.name}}">
       <span class="thr-name">{{row.name}}</span>
 
       {{!-- Strength/Weakness icon. In edit mode, clicking it cycles the trait. --}}
       <button type="button" class="thr-slot" data-thr-action="cycle-trait"
               data-tooltip="{{row.traitLabel}}"
               {{#unless ../thr.editMode}}disabled{{/unless}}>
-        {{#if row.traitImg}}<img src="{{row.traitImg}}" alt="{{row.traitLabel}}" width="32" height="32">{{/if}}
+        {{#if row.traitImg}}<img class="thr-trait-img" src="{{row.traitImg}}" alt="{{row.traitLabel}}">{{/if}}
       </button>
 
       {{!-- Budding icon (4 steps). In edit mode, clicking it toggles Budding.
             A Strength can't be Budding, so that case is disabled. --}}
       <button type="button" class="thr-slot" data-thr-action="toggle-budding"
-              data-tooltip="{{row.buddingTooltip}}"
+              {{#if row.budding}}data-tooltip="{{row.buddingTooltip}}"{{/if}}
               {{#if row.buddingDisabled}}disabled{{else}}{{#unless ../thr.editMode}}disabled{{/unless}}{{/if}}>
-        {{#if row.buddingImg}}<img src="{{row.buddingImg}}" alt="{{localize 'THR.Budding.Label'}}" width="32" height="32">{{/if}}
+        {{#if row.buddingImg}}<img class="thr-budding-img" src="{{row.buddingImg}}" alt="{{localize 'THR.Budding.Label'}}">{{/if}}
       </button>
 
       {{!-- XP toward the next rank, e.g. "0/6". Promote shows when it is full. --}}
@@ -59,7 +62,7 @@
         <i class="fa-solid fa-plus"></i>
       </button>
 
-      <img class="thr-rank-img" src="{{row.rankImg}}" alt="{{row.rank}}" width="32" height="32">
+      <img class="thr-rank-img" src="{{row.rankImg}}" alt="{{row.rank}}">
 
       {{!-- Rank can only be changed directly in edit mode. --}}
       <select class="thr-rank" data-thr-field="rank" {{#unless ../thr.editMode}}disabled{{/unless}}>

@@ -127,7 +127,9 @@ function buildContext(sheet) {
       budding: t.budding,
       // A Strength cannot be a Budding Talent, so the Budding slot is disabled.
       buddingDisabled: t.trait === TRAITS.STRENGTH,
-      buddingTooltip: `${t.invested} / ${threshold}`,
+      // Only Budding talents show progress on hover; ordinary talents have no
+      // Budding tooltip at all.
+      buddingTooltip: t.budding ? `${t.invested} / ${threshold}` : null,
       // Rank dropdown options, with the current value pre-selected.
       rankOptions: RANKS.map((r) => ({ id: r.id, label: r.label, selected: r.id === t.rank }))
     };

@@ -13,7 +13,7 @@ Character and NPC sheets (vehicles and groups are excluded).
 - **Budding Talent**: once 12 lifetime points (GM setting) are invested, it becomes a
   Strength. A trait change only affects *future* ranks, never the current bar.
 - Each talent row shows: talent icon, name, Strength/Weakness icon, Budding icon, XP (`0/6`),
-  `+`, rank icon and rank dropdown.
+  `+`, rank icon and rank dropdown, laid out as 8 equal-width columns (long names wrap).
 - In edit mode, click the Strength/Weakness icon slot to cycle Neutral/Strength/Weakness and
   the Budding slot to toggle Budding. The rank dropdown and XP pool are also edit-mode only.
 
@@ -23,15 +23,16 @@ Character and NPC sheets (vehicles and groups are excluded).
 | 1 | 2  | 4 | 6  | 8 | 10 | 12| 14 | 16| 18 |
 
 ## Images
-Place your 32x32 images in:
-- `assets/talents/<id>.webp` (swords, lances, axes, bows, brawling, reason, faith, authority, armor, riding, flying)
-- `assets/ranks/<file>.webp` (`e`, `e-plus`, `d`, `d-plus`, `c`, `c-plus`, `b`, `b-plus`, `a`, `a-plus`, `s`)
+Place your images in the folders below. Sizes are set in `styles/ranks.css` and keep each type's
+ratio: talent icons 45x45, Strength/Weakness 94x94, Budding 174x158, rank 112x120.
+- `assets/talents/<id>.png` (swords, lances, axes, bows, brawling, reason, faith, authority, armor, riding, flying)
+- `assets/ranks/<file>.png` (`e`, `e-plus`, `d`, `d-plus`, `c`, `c-plus`, `b`, `b-plus`, `a`, `a-plus`, `s`)
 
-- `assets/traits/strength.webp` and `assets/traits/weakness.webp`
-- `assets/budding/budding-0.webp` to `budding-3.webp` (0/3, 1/3, 2/3, 3/3 complete).
+- `assets/traits/strength.png` and `assets/traits/weakness.png`
+- `assets/budding/budding-0.png` to `budding-3.png` (0/3, 1/3, 2/3, 3/3 complete).
   The icon advances every third of the Budding threshold (every 4 points by default).
 
-If you use PNG, change `IMAGE_EXT` in `scripts/config.js`.
+If you use another format, change `IMAGE_EXT` in `scripts/config.js`.
 
 ## Macro / module API
 ```js
